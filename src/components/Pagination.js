@@ -1,25 +1,32 @@
-import Pagination from 'react-bootstrap/Pagination';
+import React from 'react';
+import ReactPaginate from 'react-paginate';
 
-function PaginationMoveis() {
-  return (
-    <Pagination>
-      <Pagination.First />
-      <Pagination.Prev />
-      <Pagination.Item>{1}</Pagination.Item>
-      <Pagination.Ellipsis />
-
-      <Pagination.Item>{10}</Pagination.Item>
-      <Pagination.Item>{11}</Pagination.Item>
-      <Pagination.Item active>{12}</Pagination.Item>
-      <Pagination.Item>{13}</Pagination.Item>
-      <Pagination.Item disabled>{14}</Pagination.Item>
-
-      <Pagination.Ellipsis />
-      <Pagination.Item>{20}</Pagination.Item>
-      <Pagination.Next />
-      <Pagination.Last />
-    </Pagination>
-  );
+const PaginationMovies = ({paginationBar , pageCount }) => {
+    const handlePageClick = (data) => {
+        console.log(data.selected + 1)
+        paginationBar(data.selected + 1)
+    }
+    return (
+        <ReactPaginate
+            breakLabel="..."
+            nextLabel="Next"
+            onPageChange={handlePageClick}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={2}
+            pageCount={pageCount}
+            previousLabel="previous"
+            containerClassName={"pagination justify-content-center p-3"}
+            pageClassName={"page-item"}
+            pageLinkClassName={"page-link"}
+            previousClassName={"page-item"}
+            nextClassName={"page-item"}
+            previousLinkClassName={"page-link"}
+            nextLinkClassName={"page-link"}
+            breakClassName={"page-item"}
+            breakLinkClassName={"page-link"}
+            activeClassName={"active"}
+        />
+    )
 }
 
-export default PaginationMoveis;
+export default PaginationMovies;
