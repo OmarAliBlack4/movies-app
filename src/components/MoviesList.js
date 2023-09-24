@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
 import CardMovie from "./CardMovie";
 import PaginationMovies from "./Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllMovie } from "../Redux/actions/actionMovies";
 
-const MoviesList = ({ movies , paginationBar , pageCount}) => {
+const MoviesList = ({ paginationBar , pageCount}) => {
+
+  const [movies, setMovies] = useState([]);
+
+
+  const dispatch = useDispatch()
+  const dataMovies = useSelector((state)=> state.initState)
+
+  useEffect(() => {
+    dispatch(getAllMovie())
+  }, []);
+
+  useEffect(() => {
+    setMovies(dataMovies)
+  }, [dataMovies]);
+
   return (
     <Row className="mt-3">
-      {movies.length >= 1? ( movies.map((mov)=>{
+      {movies.length >= 1 ? ( movies.map((mov)=>{
         return(
           <CardMovie key={mov.id} mov={mov}/>
         )
